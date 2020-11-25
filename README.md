@@ -1,3 +1,3 @@
 # C-Sharp-Codes
 
-Some code in the C # language
+A few code in the C # language
