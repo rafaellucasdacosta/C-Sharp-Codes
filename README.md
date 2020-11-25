@@ -1,3 +1,3 @@
 # C-Sharp-Codes
 
-A few code in the C # language
+A simple set of algorithms developed with c#
