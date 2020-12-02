@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using ContractProcessing.Exceptions;
 
 namespace ContractProcessing.Entities
 {
@@ -13,6 +13,10 @@ namespace ContractProcessing.Entities
 
         public Contract(int number, DateTime date, double totalValue)
         {
+            if(totalValue < 0)
+            {
+                throw new DomainException("The contract value must be positive.");
+            }
             Number = number;
             Date = date;
             TotalValue = totalValue;

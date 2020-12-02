@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using ContractProcessing.Exceptions;
 using ContractProcessing.Entities;
 
 namespace ContractProcessing.Services
@@ -16,6 +15,11 @@ namespace ContractProcessing.Services
 
         public void ProcessContract(Contract contract, int months)
         {
+            if(months <= 0)
+            {
+                throw new DomainException("Number of installments must be highter than zero.");
+            }
+
             DateTime dueDate;
             double amount;
             double baseQuota = contract.TotalValue / months;            
