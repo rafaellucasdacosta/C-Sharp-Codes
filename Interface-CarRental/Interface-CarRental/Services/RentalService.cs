@@ -1,5 +1,6 @@
 ﻿using System;
 using Interface_CarRental.Entities;
+using Interface_CarRental.Exceptions;
 
 namespace Interface_CarRental.Services
 {
@@ -11,6 +12,10 @@ namespace Interface_CarRental.Services
 
         public RentalService(double pricePerHour, double pricePerDay, ITaxService taxService)
         {
+            if(pricePerDay <= 0 || pricePerHour <= 0)
+            {
+                throw new DomainException("The price must be a positive value!");
+            }
             PricePerHour = pricePerHour;
             PricePerDay = pricePerDay;
             _taxService = taxService;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Interface_CarRental.Exceptions;
 
 namespace Interface_CarRental.Entities
 {
@@ -11,6 +12,10 @@ namespace Interface_CarRental.Entities
 
         public CarRental(DateTime start, DateTime finish, Vehicle vehicle)
         {
+            if(finish < start)
+            {
+                throw new DomainException("Return date must be after pickup date!");
+            }
             Start = start;
             Finish = finish;
             Vehicle = vehicle;
