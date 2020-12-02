@@ -21,12 +21,12 @@ namespace ContractProcessing
 
             Contract contract = new Contract(number, date, value);
 
-            ContractService payPal = new ContractService(new PaypalService());
+            ContractService paypal = new ContractService(new PaypalService());
 
-            payPal.ProcessContract(contract, installments);
+            paypal.ProcessContract(contract, installments);
 
             Console.WriteLine("Installments: ");
-            foreach(Installment i in contract.installments)
+            foreach(Installment i in contract.Installments)
             {
                 Console.WriteLine(i);
             }

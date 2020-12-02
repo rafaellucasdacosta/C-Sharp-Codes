@@ -7,25 +7,26 @@ namespace ContractProcessing.Services
 {
     class ContractService
     {
-        IOnlinePaymentService _OnlinePaymentService;
+        public IOnlinePaymentService OnlinePaymentService { get; set; }
 
         public ContractService(IOnlinePaymentService onlinePaymentService)
         {
-            _OnlinePaymentService = onlinePaymentService;
+            OnlinePaymentService = onlinePaymentService;
         }
 
         public void ProcessContract(Contract contract, int months)
         {
-            double baseAmount = contract.TotalValue / months;
-            double totalAmount;
+            DateTime dueDate;
+            double amount;
+            double baseQuota = contract.TotalValue / months;            
 
-            for (int i = 0; i < months; i++)
+            for (int i = 1; i <= months; i++)
             {
-                
-                totalAmount = baseAmount + _OnlinePaymentService.Interest(baseAmount, i + 1);
-                totalAmount += _OnlinePaymentService.PaymentFee(totalAmount);
+                dueDate = contract.Date.AddMonths(i);
+                amount = baseQuota + OnlinePaymentService.Interest(baseQuota, i);
+                amount += OnlinePaymentService.PaymentFee(amount);
 
-                contract.installments.Add(new Installment(contract.Date.AddMonths(i+1), totalAmount)); 
+                contract.Installments.Add(new Installment(dueDate, amount));
             }
 
         }

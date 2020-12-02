@@ -9,7 +9,7 @@ namespace ContractProcessing.Entities
         public int Number { get; set; }
         public DateTime Date { get; set; }
         public double TotalValue { get; set; }
-        public List<Installment> installments = new List<Installment>();
+        public List<Installment> Installments { get; set; } = new List<Installment>();
 
         public Contract(int number, DateTime date, double totalValue)
         {
